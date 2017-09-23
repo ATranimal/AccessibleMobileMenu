@@ -24,10 +24,10 @@ app.use(bodyParser.json());
 var routes = require('./src/routes/menuRoutes'); //importing route
 routes(app); //register the route
 
-//==========
+//=======================
 // EJS (Templating) Setup
-//==========
-
+//=======================
+app.set('view engine', 'ejs');
 
 //============
 // 404 Routing
