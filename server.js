@@ -2,21 +2,36 @@ var express = require('express'),
   app = express(),
   port = process.env.PORT || 3000,
   mongoose = require('mongoose'),
-  Dish = require('./api/models/menuModel'), //created model loading here
+  Dish = require('./src/models/menuModel'), //created model loading here
   bodyParser = require('body-parser');
   
-// mongoose instance connection url connection
+
+//============================================
+// Mongoose Instance connection URL
+//============================================
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/Menudb'); 
-	
 
+//==================
+// Body parser setup 
+//==================
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-
-var routes = require('./api/routes/menuRoutes'); //importing route
+//=====================
+// Route import & setup
+//=====================
+var routes = require('./src/routes/menuRoutes'); //importing route
 routes(app); //register the route
 
+//==========
+// EJS (Templating) Setup
+//==========
+
+
+//============
+// 404 Routing
+//============
 app.use(function(req, res) {
   res.status(404).send({url: req.originalUrl + ' not found'})
 });
