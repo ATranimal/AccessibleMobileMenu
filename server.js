@@ -25,6 +25,7 @@ app.use(bodyParser.json());
 // Route import & setup
 //=====================
 app.use('/api/v1', require(__routes));
+app.use('/', require(__base + 'src/site/'))
 
 //=======================
 // EJS (Templating) Setup
