@@ -17,20 +17,9 @@ var DishSchema = new Schema({
     type: Number,
     required: 'Please enter the price of the dish'
   },
-<<<<<<< HEAD
-  tags: {
-    type: [String],
-    required: 'Please tag the dish'
-  },
-  Created_date: {
-    type: Date,
-    default: Date.now
-  }
-=======
   tags: [{type: String}]
 },{
   timestamps: true
->>>>>>> origin
 });
 
 module.exports = mongoose.model('Dishes', DishSchema);
