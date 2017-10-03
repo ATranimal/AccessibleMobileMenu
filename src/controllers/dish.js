@@ -46,7 +46,7 @@ exports.update_a_dish = function(req, res) {
 
 exports.delete_a_dish = function(req, res) {
   Dish.remove({
-    _id: req.params.taskId
+    _id: req.params.dishId
   }, function(err, dish) {
     if (err)
       res.send(err);

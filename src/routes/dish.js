@@ -6,24 +6,13 @@ var express = require('express'),
 
 router.route('/')
   .get(function (req, res, next) {
-  Dish.find({}, function(err, foodList) {
-    // TODO: Proper error hadnling
-    if (err) console.log("ERROR: Query cannot be found");
-    return res.render('pages/index', {
-      dishes: foodList
-    });
-  });
-})
-
-router.route('/dishes')
-  .get(function (req, res, next) {
     return menu.list_all_dishes(req, res);
   })
   .post(function (req, res, next) {
     return menu.create_a_dish(req, res)
   })
 
-router.route('dishes/:dishId')
+router.route('/:dishId')
   .get(function (req, res, next) {
     return menu.read_a_dish(req, res)
   })

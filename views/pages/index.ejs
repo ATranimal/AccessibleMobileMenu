@@ -1,6 +1,21 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+
 <h1>Chez OO Menu</h1>
-<ul>
+<input type="text" id="box" value="">
+<ul class="menu">
     <% dishes.forEach(function(dish) { %>
-        <li><i>$<%= dish.price%></i>  <%= dish.name %>: <%= dish.description%></li>
+    <li data-tags=<%=dish.tags%>><%= dish.name %>: <%= dish.description %><i> $<%= dish.price %></i> </li>
     <% }); %>
 </ul>
+
+<script type='text/javascript'>
+  $('#box').keyup(function () {
+    var input = $(this).val().toLowerCase();
+    console.log(input);
+    $('.menu>li').each(function () {
+      var text = $(this).text().toLowerCase();
+      var tags = $(this).attr("data-tags");
+      ((text.indexOf(input) >= 0)|| (tags.indexOf(input) >= 0)) ? $(this).show() : $(this).hide();
+    })
+  });
+</script>

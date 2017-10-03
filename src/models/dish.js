@@ -6,7 +6,8 @@ var Schema = mongoose.Schema;
 var DishSchema = new Schema({
   name: {
     type: String,
-    required: 'Please enter the name of the dish'
+    required: 'Please enter the name of the dish',
+    unique: true
   },
   description: {
     type: String,
@@ -16,10 +17,9 @@ var DishSchema = new Schema({
     type: Number,
     required: 'Please enter the price of the dish'
   },
-  Created_date: {
-    type: Date,
-    default: Date.now
-  },
+  tags: [{type: String}]
+},{
+  timestamps: true
 });
 
 module.exports = mongoose.model('Dishes', DishSchema);
