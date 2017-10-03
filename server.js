@@ -1,10 +1,11 @@
 var express = require('express'),
-  app = express(),
-  port = process.env.PORT || 3000,
   mongoose = require('mongoose'),
-  Dish = require('./src/models/menuModel'), //created model loading here
+  Dish = require('./src/models/dish')
   bodyParser = require('body-parser');
-  
+
+global.__base        = __dirname + '/';
+global.__models      = __base + 'src/models/';
+global.__routes      = __base + 'src/routes/';
 
 //============================================
 // Mongoose Instance connection URL
@@ -15,14 +16,15 @@ mongoose.connect('mongodb://localhost/Menudb');
 //==================
 // Body parser setup 
 //==================
+app = express();
+port = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 //=====================
 // Route import & setup
 //=====================
-var routes = require('./src/routes/menuRoutes'); //importing route
-routes(app); //register the route
+app.use('/api/v1', require(__routes));
 
 //=======================
 // EJS (Templating) Setup

@@ -1,11 +1,11 @@
 {
-  "name": "todolistapi",
+  "name": "mobileMenu",
   "version": "1.0.0",
-  "description": "RESTful todoListApi",
-  "main": "index.js",
+  "description": "A REST api for a mobile restaurant menu",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "nodemon"
   },
   "keywords": [
     "RESTful",
@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "body-parser": "^1.18.1",
+    "ejs": "^2.5.7",
     "express": "^4.15.4",
     "mongoose": "^4.11.12"
   }
