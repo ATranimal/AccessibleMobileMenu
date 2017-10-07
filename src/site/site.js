@@ -15,4 +15,10 @@ router.route('/')
     });
   })
 
+router.route('/inputform/')
+  .get(function (req, res, next) {
+    return res.render('pages/inputform');
+  });
+
+  
 module.exports = router;
