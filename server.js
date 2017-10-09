@@ -11,8 +11,8 @@ global.__routes      = __base + 'src/routes/';
 // Mongoose Instance connection URL
 //============================================
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/menudb');
-// mongoose.connect('mongodb://heroku_q2x32n54:bacghnbpvs47faq3p8u1j9eh2v@ds161584.mlab.com:61584/heroku_q2x32n54'); 
+// mongoose.connect('mongodb://localhost/Menudb');
+mongoose.connect('mongodb://heroku_q2x32n54:bacghnbpvs47faq3p8u1j9eh2v@ds161584.mlab.com:61584/heroku_q2x32n54'); 
 
 //==================
 // Body parser setup 

@@ -1,3 +1,22 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 
 <h1>Chez OO Input Form</h1>
+
+<form action="/api/v1/dish" method="post">
+    <fieldset>
+       <label for="name">Name:</label>
+       <input type="text" id="name" name="name" placeholder="Enter the dish name" />
+       <br />
+       <label for="price">Price:</label>
+       <input type="text" id="price" name="price" placeholder="Enter the price" />
+       <br />
+       <label for="description">Description:</label>
+       <textarea id="description" name="description" placeholder="Enter a short description about the dish"></textarea>
+       <br />
+       <label for="tags">Tags:</label>
+       <input type="text" id="tags" name="tags"/>  
+       <input type="text" id="tags" name="tags"/>       
+       <input type="text" id="tags" name="tags"/>            
+       <input type="submit" value="Submit" />
+    </fieldset>
+ </form>
