@@ -2,6 +2,7 @@ var express = require('express'),
   mongoose = require('mongoose'),
   Dish = require('./src/models/dish')
   bodyParser = require('body-parser');
+  path = require('path');
 
 global.__base        = __dirname + '/';
 global.__models      = __base + 'src/models/';
@@ -31,6 +32,7 @@ app.use('/', require(__base + 'src/site/'))
 //=======================
 // EJS (Templating) Setup
 //=======================
+app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 
 //============
