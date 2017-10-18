@@ -17,6 +17,10 @@ var DishSchema = new Schema({
     type: Number,
     required: 'Please enter the price of the dish'
   },
+  category: {
+    type: String,
+    required: "Please enter a menu category"
+  },
   tags: [{type: String}]
 },{
   timestamps: true
