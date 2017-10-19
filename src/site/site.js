@@ -15,6 +15,30 @@ router.route('/')
     });
   })
 
+  router.route('/2/')
+  .get(function (req, res, next) {
+    Dish.find({}, function(err, foodList) {
+      // TODO: Proper error hadnling
+      if (err) console.log("ERROR: Query cannot be found");
+      return res.render('pages/index2', {
+        dishes: foodList
+      });
+    });
+  })
+
+
+  router.route('/3/')
+  .get(function (req, res, next) {
+    Dish.find({}, function(err, foodList) {
+      // TODO: Proper error hadnling
+      if (err) console.log("ERROR: Query cannot be found");
+      return res.render('pages/index3', {
+        dishes: foodList
+      });
+    });
+  })
+
+
 router.route('/inputform/')
   .get(function (req, res, next) {
     return res.render('pages/inputform');
