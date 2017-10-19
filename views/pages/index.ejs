@@ -1,15 +1,162 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 
+<a href="#" onClick="openPref();" id="pref">Preferences</a>
+<div id="div-pref"></div>
+
 <h1>Chez OO Menu</h1>
 <input type="text" id="box" value="">
-<ul class="menu">
-    <% dishes.forEach(function(dish) { %>
+<ul id="menu" class="menu">
+    <!-- <% dishes.forEach(function(dish) { %>
     <li data-tags=<%=dish.tags%>><%= dish.name %>: <%= dish.description %><i> $<%= dish.price %></i> </li>
-    <% }); %>
+    <% }); %> -->
 </ul>
 
 
 <script type='text/javascript'>
+  var prefOpen = false;
+  
+  function openPref(){
+    if (prefOpen){
+      $("#div-pref").empty();
+      prefOpen = false;
+    }
+
+    else{
+      $("#div-pref").append(
+        "<input type=checkbox value=non-spicy id=spicy>Non-Spicy</input>" +
+        "<input type=checkbox value=vegetarian id=vegetarian>Vegetarian</input>" 
+      );
+      $("#spicy").click(function() {
+        if($("#spicy").is(':checked')){
+          if($("#vegetarian").is(':checked')){
+            $("#menu").empty();
+            $("#menu").append(
+              "<h3>Appetizer</h3>" + 
+              "<li data-tags=vegetarian>Lentil Soup: A hearty lentil soup.<i> $3.99</i> </li>" +
+              "<h3>Main Course</h3>" + 
+              "<li data-tags=vegetarian>Margherita Pizza: Pizza cooked in our stone oven, topped with mozzarella, tomato sauce, and basil.<i> $10</i> </li>" +
+              "<h3>Dessert</h3>" + 
+              "<li data-tags=vegetarian>Cheesecake: A fluffy, strawberry cheesecake made in house.<i> $4</i> </li>" )
+          }
+          else{
+            $("#menu").empty();
+            $("#menu").append(
+              "<h3>Appetizer</h3>" + 
+              "<li data-tags=vegetarian>Lentil Soup: A hearty lentil soup.<i> $3.99</i> </li>" +
+              "<h3>Main Course</h3>" + 
+              "<li data-tags=>Chicken with Vegetables: Steamed chicken, served with a side of broccoli and potatoes.<i> $9</i> </li>" +
+              "<li data-tags=>Tonkotsu Ramen: Pork ramen server in a tonkotsu broth with chasu.<i> $11.5</i> </li>" +
+              "<li data-tags=>Chorizo Tacos: 3 Tacos filled with chorizo and wrapped in corn tortillas.<i> $6</i> </li>" +
+              "<li data-tags=>Salmon Sashimi: Salmon that has imported straight from Japan. <i> $15</i> </li>" +
+              "<li data-tags=vegetarian>Margherita Pizza: Pizza cooked in our stone oven, topped with mozzarella, tomato sauce, and basil.<i> $10</i> </li>" +
+              "<h3>Dessert</h3>" + 
+              "<li data-tags=vegetarian>Cheesecake: A fluffy, strawberry cheesecake made in house.<i> $4</i> </li>" )
+            }
+        }
+        else{
+          if($("#vegetarian").is(':checked')){
+            $("#menu").empty();
+            $("#menu").append(
+              "<h3>Appetizer</h3>" + 
+              "<li data-tags=vegetarian>Lentil Soup: A hearty lentil soup.<i> $3.99</i> </li>" +
+              "<h3>Main Course</h3>" + 
+              "<li data-tags=vegetarian>Paneer Spinach Curry: Spinach curry made with paneer cheese. Serverd with naan bread.<i> $7</i> </li>" +
+              "<li data-tags=vegetarian>Margherita Pizza: Pizza cooked in our stone oven, topped with mozzarella, tomato sauce, and basil.<i> $10</i> </li>" +
+              "<h3>Dessert</h3>" + 
+              "<li data-tags=vegetarian>Cheesecake: A fluffy, strawberry cheesecake made in house.<i> $4</i> </li>" )
+            }
+          else{
+            $("#menu").empty();
+            $("#menu").append(
+              "<h3>Appetizer</h3>" + 
+              "<li data-tags=vegetarian>Lentil Soup: A hearty lentil soup.<i> $3.99</i> </li>" +
+              "<li data-tags=spicy>Jalapeno Poppers: Jalapeno Peppers baked and stuffed with ground beef.<i> $4.99</i> </li>" +
+              "<h3>Main Course</h3>" + 
+              "<li data-tags=>Chicken with Vegetables: Steamed chicken, served with a side of broccoli and potatoes.<i> $9</i> </li>" +
+              "<li data-tags=vegetarian>Paneer Spinach Curry: Spinach curry made with paneer cheese. Serverd with naan bread.<i> $7</i> </li>" +
+              "<li data-tags=>Tonkotsu Ramen: Pork ramen server in a tonkotsu broth with chasu.<i> $11.5</i> </li>" +
+              "<li data-tags=>Chorizo Tacos: 3 Tacos filled with chorizo and wrapped in corn tortillas.<i> $6</i> </li>" +
+              "<li data-tags=>Salmon Sashimi: Salmon that has imported straight from Japan. <i> $15</i> </li>" +
+              "<li data-tags=vegetarian>Margherita Pizza: Pizza cooked in our stone oven, topped with mozzarella, tomato sauce, and basil.<i> $10</i> </li>" +
+              "<h3>Dessert</h3>" + 
+              "<li data-tags=vegetarian>Cheesecake: A fluffy, strawberry cheesecake made in house.<i> $4</i> </li>" )
+            }
+        }
+    });
+    $("#vegetarian").click(function() {
+        if($("#vegetarian").is(':checked')){
+          if($("#spicy").is(':checked')){
+            $("#menu").empty();
+            $("#menu").append(
+              "<h3>Appetizer</h3>" + 
+              "<li data-tags=vegetarian>Lentil Soup: A hearty lentil soup.<i> $3.99</i> </li>" +
+              "<h3>Main Course</h3>" + 
+              "<li data-tags=vegetarian>Margherita Pizza: Pizza cooked in our stone oven, topped with mozzarella, tomato sauce, and basil.<i> $10</i> </li>" +
+              "<h3>Dessert</h3>" + 
+              "<li data-tags=vegetarian>Cheesecake: A fluffy, strawberry cheesecake made in house.<i> $4</i> </li>" )
+            }
+          else{
+            $("#menu").empty();
+            $("#menu").append(
+              "<h3>Appetizer</h3>" + 
+              "<li data-tags=vegetarian>Lentil Soup: A hearty lentil soup.<i> $3.99</i> </li>" +
+              "<h3>Main Course</h3>" + 
+              "<li data-tags=vegetarian>Paneer Spinach Curry: Spinach curry made with paneer cheese. Serverd with naan bread.<i> $7</i> </li>" +
+              "<li data-tags=vegetarian>Margherita Pizza: Pizza cooked in our stone oven, topped with mozzarella, tomato sauce, and basil.<i> $10</i> </li>" +
+              "<h3>Dessert</h3>" + 
+              "<li data-tags=vegetarian>Cheesecake: A fluffy, strawberry cheesecake made in house.<i> $4</i> </li>" )
+            }
+        }
+        else{        
+          if($("#spicy").is(':checked')){
+            $("#menu").empty();
+            $("#menu").append(
+              "<h3>Appetizer</h3>" + 
+              "<li data-tags=vegetarian>Lentil Soup: A hearty lentil soup.<i> $3.99</i> </li>" +
+              "<h3>Main Course</h3>" + 
+              "<li data-tags=>Chicken with Vegetables: Steamed chicken, served with a side of broccoli and potatoes.<i> $9</i> </li>" +
+              "<li data-tags=>Tonkotsu Ramen: Pork ramen server in a tonkotsu broth with chasu.<i> $11.5</i> </li>" +
+              "<li data-tags=>Chorizo Tacos: 3 Tacos filled with chorizo and wrapped in corn tortillas.<i> $6</i> </li>" +
+              "<li data-tags=>Salmon Sashimi: Salmon that has imported straight from Japan. <i> $15</i> </li>" +
+              "<li data-tags=vegetarian>Margherita Pizza: Pizza cooked in our stone oven, topped with mozzarella, tomato sauce, and basil.<i> $10</i> </li>" +
+              "<h3>Dessert</h3>" + 
+              "<li data-tags=vegetarian>Cheesecake: A fluffy, strawberry cheesecake made in house.<i> $4</i> </li>" )
+            }
+          else{
+            $("#menu").empty();
+            $("#menu").append(
+                "<h3>Appetizer</h3>" + 
+                "<li data-tags=vegetarian>Lentil Soup: A hearty lentil soup.<i> $3.99</i> </li>" +
+                "<h3>Main Course</h3>" + 
+                "<li data-tags=>Chicken with Vegetables: Steamed chicken, served with a side of broccoli and potatoes.<i> $9</i> </li>" +
+                "<li data-tags=>Tonkotsu Ramen: Pork ramen server in a tonkotsu broth with chasu.<i> $11.5</i> </li>" +
+                "<li data-tags=>Chorizo Tacos: 3 Tacos filled with chorizo and wrapped in corn tortillas.<i> $6</i> </li>" +
+                "<li data-tags=>Salmon Sashimi: Salmon that has imported straight from Japan. <i> $15</i> </li>" +
+                "<li data-tags=vegetarian>Margherita Pizza: Pizza cooked in our stone oven, topped with mozzarella, tomato sauce, and basil.<i> $10</i> </li>" +
+                "<h3>Dessert</h3>" + 
+                "<li data-tags=vegetarian>Cheesecake: A fluffy, strawberry cheesecake made in house.<i> $4</i> </li>" )
+        }
+        }
+    });
+      prefOpen = true;
+    }
+  }
+
+  $("#menu").append(
+              "<h3>Appetizer</h3>" + 
+              "<li data-tags=vegetarian>Lentil Soup: A hearty lentil soup.<i> $3.99</i> </li>" +
+              "<li data-tags=spicy>Jalapeno Poppers: Jalapeno Peppers baked and stuffed with ground beef.<i> $4.99</i> </li>" +
+              "<h3>Main Course</h3>" + 
+              "<li data-tags=>Chicken with Vegetables: Steamed chicken, served with a side of broccoli and potatoes.<i> $9</i> </li>" +
+              "<li data-tags=vegetarian>Paneer Spinach Curry: Spinach curry made with paneer cheese. Serverd with naan bread.<i> $7</i> </li>" +
+              "<li data-tags=>Tonkotsu Ramen: Pork ramen server in a tonkotsu broth with chasu.<i> $11.5</i> </li>" +
+              "<li data-tags=>Chorizo Tacos: 3 Tacos filled with chorizo and wrapped in corn tortillas.<i> $6</i> </li>" +
+              "<li data-tags=>Salmon Sashimi: Salmon that has imported straight from Japan. <i> $15</i> </li>" +
+              "<li data-tags=vegetarian>Margherita Pizza: Pizza cooked in our stone oven, topped with mozzarella, tomato sauce, and basil.<i> $10</i> </li>" +
+              "<h3>Dessert</h3>" + 
+              "<li data-tags=vegetarian>Cheesecake: A fluffy, strawberry cheesecake made in house.<i> $4</i> </li>" 
+            );
+
   $('#box').keyup(function () {
     var input = $(this).val().toLowerCase();
     console.log(input);
