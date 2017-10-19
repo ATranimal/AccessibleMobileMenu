@@ -6,7 +6,9 @@ $.get("/api/v1/dish", function( data ){
 });
 
 function initialDisplay() {
-    console.log(dishes);
+    dishes.forEach(function(dish) {
+        
+    })
 }
 
 $('#box').keyup(function () {
