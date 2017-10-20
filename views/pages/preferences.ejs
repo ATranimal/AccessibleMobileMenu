@@ -3,16 +3,6 @@
 <h1>Chez OO Preferences</h1>
 
 <script>
-//  var $checkboxes = $('input:checkbox')
-//
-//
-//  function setLocalStorage() {
-//    $checkboxes.map(function () {
-//      if(this.checked) {
-//        localStorage.setItem(this.name, true)
-//      }
-//    })
-//  }
     function setLocalStorage(input) {
       if(input.is(':checked')){
         localStorage.setItem(input.attr('name'), true);
@@ -44,3 +34,16 @@
         <input type="number" name="drink-price" placeholder="Max drink price"/><br>
     </fieldset>
 </form>
+
+<script>
+  var $checkboxes = $('input:checkbox')
+
+  $(document).ready(function () {
+    for(var i = 0; i < $checkboxes.length; i++){
+      var checkbox = $checkboxes[i];
+      if(localStorage.getItem(checkbox.name)) {
+        checkbox.setAttribute("checked", true);
+      }
+    }
+  })
+</script>
