@@ -11,6 +11,7 @@ router.route('/')
       // TODO: Proper error hadnling
       if (err) console.log("ERROR: Query cannot be found");
       var categories = _.pluck(foodList, 'category');
+      categories = _.uniq(categories)
       return res.render('pages/index', {
         dishes: foodList,
         categories: categories

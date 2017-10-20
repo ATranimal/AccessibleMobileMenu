@@ -1,9 +1,14 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 
 <h1>Chez OO Preferences</h1>
-
+<a href="/dish">Back</a>
 <script>
     function setLocalStorage(input) {
+      if(input.is(':input')){
+        localStorage.setItem(input.attr('name'), input.val())
+        console.log(input.attr('name') +" set to "+ localStorage.getItem(input.name))
+        return;
+      }
       if(input.is(':checked')){
         localStorage.setItem(input.attr('name'), true);
       }else{
@@ -28,21 +33,27 @@
         <input type="checkbox" name="middle-eastern" onclick="setLocalStorage($(this))"/>Middle Eastern<br>
         <input type="checkbox" name="african" onclick="setLocalStorage($(this))"/>African<br>
         <label for="name" style="font-weight:bold">Price</label><br>
-        <input type="number" name="entree-price" placeholder="Max entree price"/><br>
-        <input type="number" name="appetizer-price" placeholder="Max appetizer price"/><br>
-        <input type="number" name="dessert-price" placeholder="Max dessert price"/><br>
-        <input type="number" name="drink-price" placeholder="Max drink price"/><br>
+        <input type="number" name="entree-price" placeholder="Max entree price" onkeyup="setLocalStorage($(this))"/><br>
+        <input type="number" name="appetizer-price" placeholder="Max appetizer price" onkeyup="setLocalStorage($(this))"/><br>
+        <input type="number" name="dessert-price" placeholder="Max dessert price" onkeyup="setLocalStorage($(this))"/><br>
+        <input type="number" name="drink-price" placeholder="Max drink price" onkeyup="setLocalStorage($(this))"/><br>
     </fieldset>
 </form>
 
 <script>
   var $checkboxes = $('input:checkbox')
-
+  var $fields = $(':input[type="number"]')
   $(document).ready(function () {
     for(var i = 0; i < $checkboxes.length; i++){
       var checkbox = $checkboxes[i];
       if(localStorage.getItem(checkbox.name)) {
         checkbox.setAttribute("checked", true);
+      }
+    }
+    for(var i = 0; i < $fields.length; i++){
+      var field = $fields[i];
+      if(localStorage.getItem(field.name) !== undefined){
+        field.setAttribute("value", localStorage.getItem(field.name))
       }
     }
   })
