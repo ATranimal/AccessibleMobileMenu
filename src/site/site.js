@@ -20,5 +20,10 @@ router.route('/inputform/')
     return res.render('pages/inputform');
   });
 
+router.route('/preferences')
+  .get(function (req, res, next) {
+    return res.render('pages/preferences');
+  })
+
   
 module.exports = router;
