@@ -10,7 +10,7 @@ router.route('/')
     Dish.find({}, function(err, foodList) {
       // TODO: Proper error hadnling
       if (err) console.log("ERROR: Query cannot be found");
-      let categories = _.pluck(foodList, 'category');
+      var categories = _.pluck(foodList, 'category');
       return res.render('pages/index', {
         dishes: foodList,
         categories: categories
