@@ -25,7 +25,7 @@
     $('.menu>li').each(function () {
       var tags = $(this).attr("data-tags");
       var keys = Object.keys(localStorage);
-      keys.filter(function (key) {return localStorage.getItem(key)});
+      keys = keys.filter(function (key) {return localStorage.getItem(key) === "true"});
       console.log(keys);
       if(!keys.every(function (key) { return tags.includes(key) })){
         $(this).hide();
