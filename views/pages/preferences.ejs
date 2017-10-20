@@ -1,0 +1,49 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+
+<h1>Chez OO Preferences</h1>
+
+<script>
+    function setLocalStorage(input) {
+      if(input.is(':checked')){
+        localStorage.setItem(input.attr('name'), true);
+      }else{
+        localStorage.setItem(input.attr('name'), false);
+      }
+      console.log(input.attr('name') +" set to "+ localStorage.getItem(input.name))
+    }
+</script>
+
+<form action="/api/v1/dish" method="post">
+    <fieldset>
+        <label for="name" style="font-weight:bold">Dietary Restrictions</label><br>
+        <input type="checkbox" name="vegetarian" onclick="setLocalStorage($(this))"/>Vegetarian<br>
+        <input type="checkbox" name="halal" onclick="setLocalStorage($(this))"/>Halal<br>
+        <input type="checkbox" name="kosher" onclick="setLocalStorage($(this))"/>Kosher<br>
+        <input type="checkbox" name="lactose intolerant" onclick="setLocalStorage($(this))"/>Lactose intolerant<br>
+        <label for="name" style="font-weight:bold">Cuisine</label><br>
+        <input type="checkbox" name="asian" onclick="setLocalStorage($(this))"/>Asian<br>
+        <input type="checkbox" name="indian" onclick="setLocalStorage($(this))"/>Indian<br>
+        <input type="checkbox" name="american" onclick="setLocalStorage($(this))"/>American<br>
+        <input type="checkbox" name="spanish" onclick="setLocalStorage($(this))"/>Spanish<br>
+        <input type="checkbox" name="middle-eastern" onclick="setLocalStorage($(this))"/>Middle Eastern<br>
+        <input type="checkbox" name="african" onclick="setLocalStorage($(this))"/>African<br>
+        <label for="name" style="font-weight:bold">Price</label><br>
+        <input type="number" name="entree-price" placeholder="Max entree price"/><br>
+        <input type="number" name="appetizer-price" placeholder="Max appetizer price"/><br>
+        <input type="number" name="dessert-price" placeholder="Max dessert price"/><br>
+        <input type="number" name="drink-price" placeholder="Max drink price"/><br>
+    </fieldset>
+</form>
+
+<script>
+  var $checkboxes = $('input:checkbox')
+
+  $(document).ready(function () {
+    for(var i = 0; i < $checkboxes.length; i++){
+      var checkbox = $checkboxes[i];
+      if(localStorage.getItem(checkbox.name)) {
+        checkbox.setAttribute("checked", true);
+      }
+    }
+  })
+</script>
