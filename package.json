@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon run"
+    "start": "nodemon"
   },
   "keywords": [
     "RESTful",
@@ -21,6 +21,7 @@
     "body-parser": "^1.18.1",
     "ejs": "^2.5.7",
     "express": "^4.15.4",
-    "mongoose": "^4.11.12"
+    "mongoose": "^4.11.12",
+    "underscore": "^1.8.3"
   }
 }
