@@ -19,6 +19,11 @@
 </details>
 <% }); %>
 
+<style>
+  summary::-webkit-details-marker {
+    display: none
+  }
+</style>
 <script type='text/javascript'>
   $('#box').keyup(function () {
     var input = $(this).val().toLowerCase();
