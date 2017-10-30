@@ -5,12 +5,18 @@
 <input type="text" id="box" value=""> <br>
 
 <% categories.forEach(function(category) { %>
+<details>
+<summary>
 <label style="font-weight:bold"><%= category %></label><br>
+</summary>
 <ul class="menu">
     <% dishes.forEach(function(dish) { %>
-    <% if (dish.category == category) { %><li data-tags=<%=dish.tags%>><%= dish.name %>: <%= dish.description %><i> $<%= dish.price %></i> </li> <% }%>
+    <% if (dish.category == category) { %><li data-tags=<%=dish.tags%>>
+        <details><summary><%= dish.name %> <i>$<%= dish.price %></i></summary> <%= dish.description %> </details>
+    </li> <% }%>
     <% }); %>
 </ul>
+</details>
 <% }); %>
 
 <script type='text/javascript'>
