@@ -12,18 +12,13 @@
 <ul class="menu">
     <% dishes.forEach(function(dish) { %>
     <% if (dish.category == category) { %><li data-tags=<%=dish.tags%>>
-        <details><summary><%= dish.name %> <i>$<%= dish.price %></i></summary> <%= dish.description %> </details>
+        <%= dish.name %> <i>$<%= dish.price %></i> <%= dish.description %> 
     </li> <% }%>
     <% }); %>
 </ul>
 </details>
 <% }); %>
 
-<style>
-  summary::-webkit-details-marker {
-    display: none
-  }
-</style>
 <script type='text/javascript'>
   $('#box').keyup(function () {
     var input = $(this).val().toLowerCase();
