@@ -4,6 +4,10 @@ var Schema = mongoose.Schema;
 
 
 var DishSchema = new Schema({
+  restaurant: {
+    type: String,
+    required: 'Please enter the name of the restaurant',
+  },
   name: {
     type: String,
     required: 'Please enter the name of the dish',
