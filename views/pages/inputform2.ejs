@@ -1,0 +1,43 @@
+<link rel="stylesheet" type="text/css" href="/css/skeleton.css" />
+<link rel="stylesheet" type="text/css" href="/css/normalize.css" />
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+
+<h1>Chez Tran Input Form</h1>
+
+<form action="/api/v1/dish" method="post">
+    <fieldset>
+       <label for="name">Name:</label>
+       <input type="text" id="name" name="name" placeholder="Enter the dish name" />
+       <br />
+       <label for="price">Menu category:</label>
+       <input type="text" id="category" name="category" placeholder="Enter the category" />
+       <br />
+       <label for="price">Price:</label>
+       <input type="text" id="price" name="price" placeholder="Enter the price" />
+       <br />
+       <label for="description">Description:</label>
+       <textarea id="description" name="description" placeholder="Enter a short description about the dish"></textarea>
+       <br />
+       <label for="tags">Tags:</label>
+       <input type="text" id="tags" name="tags"/>  
+       <input type="text" id="tags" name="tags"/>       
+       <input type="text" id="tags" name="tags"/>            
+       <input type="submit" value="Submit" />
+    </fieldset>
+ </form>
+
+ <h1>List of items in the database</h1>
+ <% dishes.forEach(function(dish) { %>
+    <% if (dish.restaurant == "tran") { %>
+    <p><%= dish.name %>  <button id="<%= dish.id %>">x</button></p>
+    <% } %>
+<% }); %>
+
+<style>
+
+body {
+    margin: 26px;
+}
+
+</style>

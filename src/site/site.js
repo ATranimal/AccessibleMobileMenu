@@ -56,8 +56,38 @@ router.route('/tran/')
 
 router.route('/inputform/')
 .get(function (req, res, next) {
-  return res.render('pages/inputform');
+  return res.render('pages/inputformsplash');
 });
+
+router.route('/inputform/aw')
+.get(function (req, res, next) {
+  Dish.find({}, function(err, foodList) {
+    // TODO: Proper error hadnling
+    if (err) console.log("ERROR: Query cannot be found");
+    var categories = _.pluck(foodList, 'category');
+    categories = _.uniq(categories)
+    return res.render('pages/inputform1', {
+      dishes: foodList,
+      categories: categories
+    });
+  });
+});
+
+router.route('/inputform/tran')
+.get(function (req, res, next) {
+  Dish.find({}, function(err, foodList) {
+    // TODO: Proper error hadnling
+    if (err) console.log("ERROR: Query cannot be found");
+    var categories = _.pluck(foodList, 'category');
+    categories = _.uniq(categories)
+    return res.render('pages/inputform2', {
+      dishes: foodList,
+      categories: categories
+    });
+  });
+});
+
+
 
 router.route('/preferences')
 .get(function (req, res, next) {
