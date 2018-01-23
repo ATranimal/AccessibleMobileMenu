@@ -42,7 +42,11 @@ $("button").click(function(e) {
     console.log(id);
 
     $.ajax({
-        
+        url: "/api/v1/dish/" + id,
+        type: "DELETE",
+        success: function(result){
+            window.location.reload(false); 
+        }
     });
 });
 
