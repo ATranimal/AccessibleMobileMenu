@@ -1,7 +1,7 @@
 var express = require('express'),
   mongoose = require('mongoose'),
   Dish = require('./src/models/dish')
-  bodyParser = require('body-parser');
+  bodyParser = require('body-parser');  
   path = require('path');
 
 global.__base        = __dirname + '/';
