@@ -4,21 +4,13 @@ label {
 
 summary::-webkit-details-marker {
     display: none;
-  }
-
-summary:before {
-background: rgb(66, 212, 115); 
-border-radius: 5px; 
-content: "+"; 
-color: #fff; 
-font-size: 1.5em; 
-font-weight: bold; 
-margin: -5px 10px 0 0; 
-padding: 0; 
-text-align: center; 
-width: 20px;
 }
 
-details[open] summary:before {
-content: "-";
+.bg-aw{
+    background: grey no-repeat center center;
+}
+.preferences{
+}
+.header{
+    flex-direction: row;
 }

@@ -1,10 +1,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script><link rel="stylesheet" type="text/css" href="/css/skeleton.css" />
 <link rel="stylesheet" type="text/css" href="/css/skeleton.css" />
 <link rel="stylesheet" type="text/css" href="/css/normalize.css" />
 <link rel="stylesheet" type="text/css" href="/css/style.css" />
-
-<h1>Chez OO Preferences</h1>
-<a href="/dish">Back</a>
 <script>
     function setLocalStorage(input) {
       input.each(function (index) {
@@ -33,38 +32,60 @@
 
     }
 </script>
-<fieldset>
-  <details>
-    <summary>
-        <label for="name" style="font-weight:bold">Dietary Restrictions</label><br>
-    </summary>
-        <input type="checkbox" name="vegetarian" />Vegetarian<br>
-        <input type="checkbox" name="halal" />Halal<br>
-        <input type="checkbox" name="kosher" />Kosher<br>
-        <input type="checkbox" name="lactose intolerant" />Lactose intolerant<br>
-  </details>
-  <details>
-    <summary>
-        <label for="name" style="font-weight:bold">Cuisine</label><br>
-    </summary>
-        <input type="checkbox" name="asian" />Asian<br>
-        <input type="checkbox" name="indian" />Indian<br>
-        <input type="checkbox" name="american" />American<br>
-        <input type="checkbox" name="spanish" />Spanish<br>
-        <input type="checkbox" name="middle-eastern" />Middle Eastern<br>
-        <input type="checkbox" name="african" />African<br>
-  </details>
-  <details>
-    <summary> 
-        <label for="name" style="font-weight:bold">Price</label><br>
-    </summary>
-        <input type="number" name="entree-price" placeholder="Max entree price" /><br>
-        <input type="number" name="appetizer-price" placeholder="Max appetizer price" /><br>
-        <input type="number" name="dessert-price" placeholder="Max dessert price" /><br>
-        <input type="number" name="drink-price" placeholder="Max drink price" /><br><br>
-  </details>
-        <button name="submit" onclick="savePreferences()">Submit</button><br>
-</fieldset>
+<div class="container">
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+        <nav class="breadcrumb bg-transparent">
+            <a class="breadcrumb-item" href="/dish">Home</a>
+            <a class="breadcrumb-item active">Preferences</a>
+        </nav>
+    </nav>
+    <a class="nav-link" href="/dish">Back to menus</a>
+    <div class="page-header">
+        <h1>Preferences</h1>
+    </div>
+    <label>Dietary Restrictions</label>
+    <div class="btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-outline-secondary">
+            <input type="checkbox" name="vegetarian" aria-checked="false"/>Vegetarian<br>
+        </label>
+        <label class="btn btn-outline-secondary">
+            <input type="checkbox" name="halal" aria-checked="false"/>Halal<br>
+        </label>
+        <label class="btn btn-outline-secondary">
+            <input type="checkbox" name="kosher" aria-checked="false"/>Kosher<br>
+        </label>
+        <label class="btn btn-outline-secondary">
+            <input type="checkbox" name="lactose intolerant" aria-checked="false"/>Lactose intolerant<br>
+        </label>
+    </div>
+    <label>Cuisine</label>
+    <div class="btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-outline-secondary">
+            <input type="checkbox" name="asian" aria-checked="false"/>Asian<br>
+        </label>
+        <label class="btn btn-outline-secondary">
+            <input type="checkbox" name="indian" aria-checked="false"/>Indian<br>
+        </label>
+        <label class="btn btn-outline-secondary">
+            <input type="checkbox" name="american" aria-checked="false"/>American<br>
+        </label>
+        <label class="btn btn-outline-secondary">
+            <input type="checkbox" name="spanish" aria-checked="false"/>Spanish<br>
+        </label>
+        <label class="btn btn-outline-secondary">
+            <input type="checkbox" name="middle-eastern" aria-checked="false"/>Middle Eastern<br>
+        </label>
+        <label class="btn btn-outline-secondary">
+            <input type="checkbox" name="african" aria-checked="false"/>African<br>
+        </label>
+    </div>
+    <label for="name" style="font-weight:bold">Price</label><br>
+    <input type="number" name="entree-price" placeholder="Max entree price" /><br>
+    <input type="number" name="appetizer-price" placeholder="Max appetizer price" /><br>
+    <input type="number" name="dessert-price" placeholder="Max dessert price" /><br>
+    <input type="number" name="drink-price" placeholder="Max drink price" /><br><br>
+    <button class="btn-primary" name="submit" onclick="savePreferences()">Submit</button><br>
+</div>
 
 <script>
   var $checkboxes = $('input:checkbox')
@@ -73,7 +94,9 @@
     for(var i = 0; i < $checkboxes.length; i++){
       var checkbox = $checkboxes[i];
       if(localStorage.getItem(checkbox.name) === 'true') {
+        checkbox.parentNode.className += " active"
         checkbox.setAttribute("checked", true);
+        checkbox.setAttribute("aria-checked", true)
       }
     }
     for(var i = 0; i < $fields.length; i++){

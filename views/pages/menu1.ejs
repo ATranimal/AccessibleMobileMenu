@@ -1,29 +1,42 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 <script src = "https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
-<link rel="stylesheet" type="text/css" href="/css/skeleton.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script><link rel="stylesheet" type="text/css" href="/css/skeleton.css" />
 <link rel="stylesheet" type="text/css" href="/css/normalize.css" />
-<link rel="stylesheet" type="text/css" href="/css/style.css" /> 
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
 
-<a href="preferences">Preferences</a>
-<h1>A&W Menu</h1>
-<input type="text" id="box" value=""> <br>
 
-<% categories.forEach(function(category) { %>
-<div class="<%= category %>">
-<details>
-<summary>
-<label style="font-weight:bold"><%= category %></label><br>
-</summary>
-<ul class="menu">
-    <% dishes.forEach(function(dish) { %>
-    <% if (dish.category == category && dish.restaurant == "aw") { %><li data-tags=<%=dish.tags%>>
-        <%= dish.name %> <i>$<%= dish.price %></i> <%= dish.description %> 
-    </li> <% }%>
-    <% }); %>
-</ul>
-</details>
+<div class="container">
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+        <nav class="breadcrumb bg-transparent">
+            <a class="breadcrumb-item" href="/dish">Home</a>
+            <a class="breadcrumb-item active">A&W</a>
+        </nav>
+        <a class="nav-link pull-right" style="padding-bottom:10" href="preferences">Preferences</a>
+    </nav>
+    <div class="jumbotron text-center bg-aw">
+        <h1>A&W Menu</h1>
+        <p>Home of the Burger Family and Canada's Best Tasting Burger.</p>
+    </div>
+    <input class="container-fluid" type="text" id="box" value="" placeholder="Search"><br>
+    <div class="categories">
+        <% categories.forEach(function(category) { %>
+        <div class="<%= category %>">
+            <button type="button" class="btn btn-outline-primary" data-toggle="collapse" data-target="#<%= category %>" aria-expanded="false" aria-controls="<%= category %>"><%= category %></button>
+            <div id="<%= category %>" class="collapse">
+                <ul class="menu list-group">
+                    <% dishes.forEach(function(dish) { %>
+                    <% if (dish.category == category && dish.restaurant == "aw") { %>
+                        <li class="list-group-item" data-tags=<%=dish.tags%>>
+                            <%= dish.name %> <i>$<%= dish.price %></i> <%= dish.description %>
+                        </li> <% }%>
+                    <% }); %>
+                </ul>
+            </div>
+        </div>
+        <% }); %>
+    </div>
 </div>
-<% }); %>
 
 <script type='text/javascript'>
   $('#box').keyup(function () {
@@ -37,7 +50,7 @@
   });
 
   $(document).ready(function () {
-    
+
     $('.menu>li').each(function () {
       var tags = $(this).attr("data-tags");
       var keys = Object.keys(localStorage);
@@ -46,25 +59,23 @@
       if(!keys.every(function (key) { return tags.includes(key) })){
         $(this).hide();
       }
-     })
-    
+    })
+
     //hiding empty categories
-    $("div").each(function(index, element) {
-        var list = $(this).find("ul");
-        var txt = $("li", list).text();
+    $('.categories>div').each(function(index, element) {
+      var list = $(this).find("ul");
+      var txt = $("li", list).text();
 
-        if(txt.length <= 0){
-          $(this).hide();
-        }
-      });
-
+      if(txt.length <= 0){
+        $(this).hide();
+      }
     });
+
+  });
 </script>
 
 <style>
-
     body {
         margin: 26px;
     }
-    
 </style>

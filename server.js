@@ -7,13 +7,19 @@ var express = require('express'),
 global.__base        = __dirname + '/';
 global.__models      = __base + 'src/models/';
 global.__routes      = __base + 'src/routes/';
+global.__mode        = process.env.MODE;
+console.log('running in mode: '+__mode)
 
 //============================================
 // Mongoose Instance connection URL
 //============================================
 mongoose.Promise = global.Promise;
 // mongoose.connect('mongodb://localhost/Menudb');
-mongoose.connect('mongodb://heroku_q2x32n54:bacghnbpvs47faq3p8u1j9eh2v@ds161584.mlab.com:61584/heroku_q2x32n54'); 
+if(__mode === 'dev'){
+  mongoose.connect('mongodb://localhost:27017/Menudb')
+}else{
+  mongoose.connect('mongodb://heroku_q2x32n54:bacghnbpvs47faq3p8u1j9eh2v@ds161584.mlab.com:61584/heroku_q2x32n54');
+}
 
 //==================
 // Body parser setup 

@@ -5,7 +5,9 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon"
+    "start": "nodemon",
+    "dev": "export MODE=dev; nodemon;",
+    "debug": "export MODE=dev; nodemon $NODE_DEBUG_OPTION --inspect;"
   },
   "keywords": [
     "RESTful",
@@ -19,6 +21,7 @@
   },
   "dependencies": {
     "body-parser": "^1.18.1",
+    "bootstrap": "^4.0.0-beta.2",
     "ejs": "^2.5.7",
     "express": "^4.15.4",
     "mongoose": "^4.11.12",
