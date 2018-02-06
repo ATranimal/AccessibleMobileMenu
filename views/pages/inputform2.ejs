@@ -3,51 +3,103 @@
 <link rel="stylesheet" type="text/css" href="/css/style.css" /> 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+<script src="/js/typeahead.bundle.js"></script>
 
-<h1>Chez Tran Input Form</h1>
+<h1>Chez Tran Dish Database</h1>
 
+<h5>Create a new dish</h5> 
 <form action="/api/v1/dish" method="post">
     <fieldset>
        <label for="name">Name:</label>
        <input type="text" id="name" name="name" placeholder="Enter the dish name" />
        <br />
-       <label for="price">Menu category:</label>
-       <input type="text" id="category" name="category" placeholder="Enter the category" />
+       <div id="category">
+        <label for="price">Category:</label>
+        <input class="typeahead" type="text" id="category" name="category" placeholder="Enter the category" />
+       </div>
        <br />
        <label for="price">Price:</label>
        <input type="text" id="price" name="price" placeholder="Enter the price" />
        <br />
        <label for="description">Description:</label>
-       <textarea id="description" name="description" placeholder="Enter a short description about the dish"></textarea>
+       <textarea id="description" name="description"></textarea>
        <br />
-       <label for="tags">Tags:</label>
-       <input type="text" id="tags" name="tags"/>  
-       <input type="text" id="tags" name="tags"/>       
-       <input type="text" id="tags" name="tags"/>            
+       <div id ="ingredients">
+        <label for="tags">Ingredients:</label>
+        <input class="typeahead" type="text" id="tags" name="tags"/>
+       </div>
+       <br />
        <input type="submit" value="Submit" />
     </fieldset>
  </form>
 
- <h1>List of items in the database</h1>
+ <h5>Edit existing dishes</h5>
  <% dishes.forEach(function(dish) { %>
     <% if (dish.restaurant == "tran") { %>
-    <p><%= dish.name %>  <button id="<%= dish.id %>">x</button></p>
+    <p><%= dish.name %> <button id="<%= dish.id%>" action="edit">Edit Dish</button><button id="<%= dish.id %>">x</button></p>
     <% } %>
 <% }); %>
 
 <script>
+var categories = ['Appetizers', 'Main Course', 'Dessert']
+var ingredients = ['Onion', 'Garlic', 'Salt', 'Pepper', 'Chicken', ' Tomato', 'Bacon', 'Steak', 'Quail', 'Trout', 'Salmon', 'Cod']
 
+// Typeahead 
+var substringMatcher = function(strs) {
+  return function findMatches(q, cb) {
+    var matches, substringRegex;
+    matches = [];
+    substrRegex = new RegExp(q, 'i');
+    $.each(strs, function(i, str) {
+      if (substrRegex.test(str)) {
+        matches.push(str);
+      }
+    });
+    cb(matches);
+  };
+};
+
+$('#category .typeahead').typeahead({
+  hint: true,
+  highlight: true,
+  minLength: 1
+},
+{
+  name: 'categories',
+  source: substringMatcher(categories)
+});
+$('#ingredients .typeahead').typeahead({
+  hint: true,
+  highlight: true,
+  minLength: 1
+},
+{
+  name: 'ingredients',
+  source: substringMatcher(ingredients)
+});
+
+
+// Editing /  Deleting Items
 $("button").click(function(e) {
+    
     var id = e.target.attributes.id.value;
-    console.log(id);
 
-    $.ajax({
+    // Edit
+    if (e.target.attributes.action != null && e.target.attributes.action.value == "edit") {
+        window.location.href = 'http://localhost:3000/dish/' + id;
+    }
+
+    // Delete
+    else {
+        $.ajax({
         url: "/api/v1/dish/" + id,
         type: "DELETE",
         success: function(result){
             window.location.reload(false); 
         }
-    });
+        });
+    }
+
 });
 
 </script>
@@ -58,5 +110,57 @@ $("button").click(function(e) {
 body {
     margin: 26px;
 }
+
+div {
+    display: inline;
+}
+
+.tt-query {
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.tt-hint {
+  color: #999
+}
+
+.tt-menu {
+  width: 422px;
+  margin: 12px 0;
+  padding: 8px 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 8px;
+     -moz-border-radius: 8px;
+          border-radius: 8px;
+  -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+     -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+          box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+
+.tt-suggestion {
+  padding: 3px 20px;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.tt-suggestion:hover {
+  cursor: pointer;
+  color: #fff;
+  background-color: #0097cf;
+}
+
+.tt-suggestion.tt-cursor {
+  color: #fff;
+  background-color: #0097cf;
+
+}
+
+.tt-suggestion p {
+  margin: 0;
+}
+
 
 </style>

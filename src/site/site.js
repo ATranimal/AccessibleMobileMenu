@@ -24,6 +24,11 @@ router.route('/dating/')
     });
   })
 
+router.route('/:dishId')
+  .get(function (req, res, next) {
+    return menu.read_a_dish(req, res)
+  })
+
 router.route('/aw/')
 .get(function (req, res, next) {
   Dish.find({}, function(err, foodList) {
