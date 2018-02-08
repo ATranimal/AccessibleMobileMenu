@@ -11,7 +11,7 @@ exports.list_all_dishes = function(req, res) {
   Dish.find({}, function(err, dish) {
     if (err)
       res.send(err);
-    res.json(dish);
+    else res.json(dish);
   });
 };
 
@@ -20,7 +20,7 @@ exports.create_a_dish = function(req, res) {
   new_dish.save(function(err, dish) {
     if (err)
       res.send(err);
-    res.json(dish);
+    else res.json(dish);
   });
 };
 
@@ -32,7 +32,7 @@ exports.read_a_dish = function(req, res) {
   Dish.findById(req.params.dishId, function(err, dish) {
     if (err)
       res.send(err);
-    res.json(dish);
+    else res.json(dish);
   });
 };
 
@@ -40,7 +40,7 @@ exports.update_a_dish = function(req, res) {
   Dish.findOneAndUpdate({_id: req.params.dishId}, req.body, {new: true}, function(err, dish) {
     if (err)
       res.send(err);
-    res.json(dish);
+    else res.json(dish);
   });
 };
 
@@ -50,6 +50,6 @@ exports.delete_a_dish = function(req, res) {
   }, function(err, dish) {
     if (err)
       res.send(err);
-    res.json({ message: 'Dish successfully deleted' });
+    else res.json({ message: 'Dish successfully deleted' });
   });
 };
