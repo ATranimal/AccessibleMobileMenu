@@ -14,6 +14,15 @@ router.route('/')
 
 router.route('/dating/')
   .get(function (req, res, next) {
+    // Dish.findById("5a0a5c50dc8b620004b28e17", function(err, foodList) {
+    //   // TODO: Proper error hadnling
+    //   if (err) console.log("ERROR: Query cannot be found");
+    //   // var sample = _.sample(foodList);
+    //   return res.render('pages/dating', {
+    //     dish: foodList,
+    //   });
+    // });
+
     Dish.find({}, function(err, foodList) {
       // TODO: Proper error hadnling
       if (err) console.log("ERROR: Query cannot be found");
@@ -24,10 +33,10 @@ router.route('/dating/')
     });
   })
 
-// router.route('/:dishId')
-//   .get(function (req, res, next) {
-//     return menu.read_a_dish(req, res)
-//   })
+router.route('/:dishId/edit')
+  .get(function (req, res, next) {
+    return menu.read_a_dish(req, res)
+  })
 
 router.route('/aw/')
 .get(function (req, res, next) {

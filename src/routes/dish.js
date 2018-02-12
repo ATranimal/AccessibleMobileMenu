@@ -11,8 +11,46 @@ router.route('/')
   .get(function (req, res, next) {
     return menu.list_all_dishes(req, res);
   })
-  .post(function (req, res, next) {
-    return menu.create_a_dish(req, res)
+  .post(upload.single('picture'), function (req, res, next) {
+    menu.create_a_dish(req, res)
+      .then(dish => {
+        if(!dish){
+          return Promise.reject('Dish not found')
+        }
+        let readFile
+        if(req.file){
+          readFile = new Promise((resolve, reject) => {
+            fs.readFile(req.file.path, function (err, result) {
+              if (err) return reject(err)
+              else return resolve(result)
+            })
+          })
+        }
+        return Promise.all([readFile, dish])
+      })
+      .then(([image, dish]) => {
+        if(!image){
+          return Promise.resolve()
+        }
+        const dishId = dish._id,
+          imgKey = 'dishes/' + dishId + '/picture',
+          fileType = req.file.mimetype
+        var imageObject = {
+          Key: imgKey,
+          Body: image,
+          ContentType: fileType,
+          ACL: 'public-read'
+        }
+        let putImage = new Promise((resolve, reject) => {
+          __s3Bucket.putObject(imageObject, function (err, result) {
+            if (err) return reject(err)
+            else return resolve(result)
+          })
+        })
+        return Promise.resolve(putImage)
+      })
+      .then(() => res.json('ok'))
+      .catch(err => next(err))
   })
 
 router.route('/:dishId')
@@ -52,7 +90,7 @@ router.route('/:dishId/picture')
   })
   .put(upload.single('picture'), function (req, res, next) {
     const dishId = req.params.dishId,
-    imgKey = 'dishes/' + dishId + '/picture',
+      imgKey = 'dishes/' + dishId + '/picture',
       fileType = req.file.mimetype
     Dish.findById(dishId)
       .then(dish => {
@@ -74,13 +112,13 @@ router.route('/:dishId/picture')
           ContentType: fileType,
           ACL: 'public-read'
         }
-        let storeImage = new Promise((resolve, reject) => {
+        let putImage = new Promise((resolve, reject) => {
           __s3Bucket.putObject(imageObject, function (err, result) {
             if (err) return reject(err)
             else return resolve(result)
           })
         })
-        return Promise.resolve(storeImage)
+        return Promise.resolve(putImage)
       })
       .then(() => res.send('ok'))
       .catch(err => next(err))

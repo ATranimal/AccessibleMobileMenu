@@ -17,11 +17,7 @@ exports.list_all_dishes = function(req, res) {
 
 exports.create_a_dish = function(req, res) {
   var new_dish = new Dish(req.body);
-  new_dish.save(function(err, dish) {
-    if (err)
-      res.send(err);
-    else res.json(dish);
-  });
+  return new_dish.save();
 };
 
 //============
