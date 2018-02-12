@@ -4,7 +4,7 @@ var express = require('express')
   bodyParser = require('body-parser')
   path = require('path')
   AWS = require('aws-sdk'),
-    env = require('./env.json')
+    // env = require('./env.json')
 
 global.__base        = __dirname + '/';
 global.__models      = __base + 'src/models/';
