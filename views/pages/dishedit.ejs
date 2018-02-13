@@ -1,1 +1,38 @@
-<h1>Dish</h1>
+<link rel="stylesheet" type="text/css" href="/css/skeleton.css" />
+<link rel="stylesheet" type="text/css" href="/css/normalize.css" />
+<link rel="stylesheet" type="text/css" href="/css/style.css" /> 
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+
+<h1><%= dish.name %></h1>
+<form>
+    <p>Description: <%= dish.description %></p>
+    <input type="text" id="description" name="description" placeholder="Update the description" />
+    <p>Price: <%= dish.price %></p>
+    <input type="text" id="price" name="price" placeholder="Update the price" />
+    <p>Category: <%= dish.category %></p>
+    <input type="text" id="category" name="category" placeholder="Update the category" />
+    <p>Ingredients: <%= dish.ingredients %></p>
+    <input type="text" id="ingredients" name="ingredients" placeholder="Update the ingredients" />
+    <br />
+    <button id="submitButton" type="button" dishid=<%= dish.id %>>Submit Changes</button>
+</form>
+
+<a href=http://localhost:3000/dish/inputform/<%= dish.restaurant %>>Go Back</a>
+
+<script>
+$("#submitButton").on("click", function(){
+    var id = $(this).data('dishid');
+    console.log(id);
+    // $.ajax({
+    //     url: "/api/v1/dish/" + id,
+    //     type: "put",
+    //     success: function(result){
+    //         window.location.reload(false); 
+    //     }
+    }
+); 
+
+
+
+</script>

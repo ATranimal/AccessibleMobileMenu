@@ -26,7 +26,15 @@ router.route('/dating/')
 
 router.route('/:dishId')
   .get(function (req, res, next) {
-    return menu.read_a_dish(req, res)
+    Dish.findById(req.params.dishId, function(err, dish) {
+      return res.render('pages/dishedit', {
+        dish: dish,
+      });
+    });
+
+
+
+    // return menu.read_a_dish(req, res)
   })
 
 router.route('/aw/')

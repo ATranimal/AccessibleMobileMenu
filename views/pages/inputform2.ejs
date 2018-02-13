@@ -8,7 +8,7 @@
 <h1>Chez Tran Dish Database</h1>
 
 <h5>Create a new dish</h5> 
-<form action="/api/v1/dish" method="post">
+<form action="/api/v1/dish" method="post" onsubmit="setTimeout(function () { window.location.reload(); }, 10)">
     <fieldset>
        <label for="name">Name:</label>
        <input type="text" id="name" name="name" placeholder="Enter the dish name" />
@@ -25,11 +25,13 @@
        <textarea id="description" name="description"></textarea>
        <br />
        <div id ="ingredients">
-        <label for="tags">Ingredients:</label>
-        <input class="typeahead" type="text" id="tags" name="tags"/>
+        <label for="ingredients">Ingredients:</label>
+        <input class="typeahead" type="text" id="ingredients" name="ingredients"/>
        </div>
        <br />
        <input type="submit" value="Submit" />
+       
+       <input type="hidden" name="restaurant" value="tran" />
     </fieldset>
  </form>
 
