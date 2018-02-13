@@ -1,8 +1,10 @@
-var express = require('express'),
-  mongoose = require('mongoose'),
+var express = require('express')
+  mongoose = require('mongoose')
   Dish = require('./src/models/dish')
-  bodyParser = require('body-parser');  
-  path = require('path');
+  bodyParser = require('body-parser')
+  path = require('path')
+  AWS = require('aws-sdk'),
+    // env = require('./env.json')
 
 global.__base        = __dirname + '/';
 global.__models      = __base + 'src/models/';
@@ -21,6 +23,19 @@ if(__mode === 'dev'){
   mongoose.connect('mongodb://heroku_q2x32n54:bacghnbpvs47faq3p8u1j9eh2v@ds161584.mlab.com:61584/heroku_q2x32n54');
 }
 
+//=============
+// AWS S3 setup
+//=============
+
+AWS.config.update({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID || env.aws.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || env.aws.AWS_SECRET_ACCESS_KEY,
+})
+global.__s3Bucket = new AWS.S3({
+  params: {
+    Bucket: process.env.S3_BUCKET_NAME || env.aws.S3_BUCKET_NAME
+  }
+})
 //==================
 // Body parser setup 
 //==================

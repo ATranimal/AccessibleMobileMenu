@@ -13,7 +13,7 @@
           console.log(element.attr('name') +" set to "+ localStorage.getItem(element.attr('name')))
           return;
         }
-        if(element.is(':checked')){
+        if(element.hasClass('active')){
           localStorage.setItem(element.attr('name'), true);
         }else{
           localStorage.setItem(element.attr('name'), false);
@@ -25,9 +25,9 @@
     function savePreferences() {
       console.log('Clicked submit');
 
-      var $checkboxes = $('input:checkbox')
+      var $buttons = $('button:button')
       var $fields = $(':input[type="number"]')
-      setLocalStorage($checkboxes);
+      setLocalStorage($buttons);
       setLocalStorage($fields);
 
     }
@@ -44,40 +44,40 @@
         <h1>Preferences</h1>
     </div>
     <label>Dietary Restrictions</label>
-    <div class="btn-group-toggle" data-toggle="buttons">
-        <label class="btn btn-outline-secondary">
-            <input type="checkbox" name="vegetarian" aria-checked="false"/>Vegetarian<br>
-        </label>
-        <label class="btn btn-outline-secondary">
-            <input type="checkbox" name="halal" aria-checked="false"/>Halal<br>
-        </label>
-        <label class="btn btn-outline-secondary">
-            <input type="checkbox" name="kosher" aria-checked="false"/>Kosher<br>
-        </label>
-        <label class="btn btn-outline-secondary">
-            <input type="checkbox" name="lactose intolerant" aria-checked="false"/>Lactose intolerant<br>
-        </label>
+    <div class="btn-group-toggle">
+        <button type="button" class="btn btn-outline-secondary" data-toggle="button" aria-pressed="false" name="vegetarian">
+            Vegetarian
+        </button>
+        <button type="button" class="btn btn-outline-secondary" data-toggle="button" aria-pressed="false" name="halal">
+            Halal
+        </button>
+        <button type="button" class="btn btn-outline-secondary" data-toggle="button" aria-pressed="false" name="kosher">
+            Kosher
+        </button>
+        <button type="button" class="btn btn-outline-secondary" data-toggle="button" aria-pressed="false" name="lactose intolerant">
+            Lactose intolerant
+        </button>
     </div>
     <label>Cuisine</label>
-    <div class="btn-group-toggle" data-toggle="buttons">
-        <label class="btn btn-outline-secondary">
-            <input type="checkbox" name="asian" aria-checked="false"/>Asian<br>
-        </label>
-        <label class="btn btn-outline-secondary">
-            <input type="checkbox" name="indian" aria-checked="false"/>Indian<br>
-        </label>
-        <label class="btn btn-outline-secondary">
-            <input type="checkbox" name="american" aria-checked="false"/>American<br>
-        </label>
-        <label class="btn btn-outline-secondary">
-            <input type="checkbox" name="spanish" aria-checked="false"/>Spanish<br>
-        </label>
-        <label class="btn btn-outline-secondary">
-            <input type="checkbox" name="middle-eastern" aria-checked="false"/>Middle Eastern<br>
-        </label>
-        <label class="btn btn-outline-secondary">
-            <input type="checkbox" name="african" aria-checked="false"/>African<br>
-        </label>
+    <div class="btn-group-toggle">
+        <button type="button" class="btn btn-outline-secondary" data-toggle="button" aria-pressed="false" name="asian">
+            Asian
+        </button>
+        <button type="button" class="btn btn-outline-secondary" data-toggle="button" aria-pressed="false" name="indian">
+            Indian
+        </button>
+        <button type="button" class="btn btn-outline-secondary" data-toggle="button" aria-pressed="false" name="american">
+            American
+        </button>
+        <button type="button" class="btn btn-outline-secondary" data-toggle="button" aria-pressed="false" name="spanish">
+            Spanish
+        </button>
+        <button type="button" class="btn btn-outline-secondary" data-toggle="button" aria-pressed="false" name="middle-eastern">
+            Middle Eastern
+        </button>
+        <button type="button" class="btn btn-outline-secondary" data-toggle="button" aria-pressed="false" name="african">
+            African
+        </button>
     </div>
     <label for="name" style="font-weight:bold">Price</label><br>
     <input type="number" name="entree-price" placeholder="Max entree price" /><br>
@@ -88,15 +88,15 @@
 </div>
 
 <script>
-  var $checkboxes = $('input:checkbox')
+  var buttons = $('button[type="button"]')
   var $fields = $(':input[type="number"]')
   $(document).ready(function () {
-    for(var i = 0; i < $checkboxes.length; i++){
-      var checkbox = $checkboxes[i];
-      if(localStorage.getItem(checkbox.name) === 'true') {
-        checkbox.parentNode.className += " active"
-        checkbox.setAttribute("checked", true);
-        checkbox.setAttribute("aria-checked", true)
+    for(var i = 0; i < buttons.length; i++){
+      var button = buttons[i];
+      if(localStorage.getItem(button.name) === 'true') {
+        button.className += " active"
+        button.setAttribute("checked", true);
+        button.setAttribute("aria-checked", true)
       }
     }
     for(var i = 0; i < $fields.length; i++){

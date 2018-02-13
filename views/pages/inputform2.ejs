@@ -10,25 +10,38 @@
 <h5>Create a new dish</h5> 
 <form action="/api/v1/dish" method="post" onsubmit="setTimeout(function () { window.location.reload(); }, 10)">
     <fieldset>
-       <label for="name">Name:</label>
+        <label for="restaurant"></label>
+        <input type="text" id="restaurant" name="restaurant" value="tran" style="display:none">
+       <label for="name">Name</label>
+        <br />
        <input type="text" id="name" name="name" placeholder="Enter the dish name" />
        <br />
        <div id="category">
-        <label for="price">Category:</label>
+        <label for="price">Category</label>
+           <br />
         <input class="typeahead" type="text" id="category" name="category" placeholder="Enter the category" />
        </div>
        <br />
-       <label for="price">Price:</label>
+       <label for="price">Price</label>
+        <br />
        <input type="text" id="price" name="price" placeholder="Enter the price" />
        <br />
-       <label for="description">Description:</label>
+       <label for="description">Description</label>
+        <br />
        <textarea id="description" name="description"></textarea>
        <br />
        <div id ="ingredients">
-        <label for="ingredients">Ingredients:</label>
-        <input class="typeahead" type="text" id="ingredients" name="ingredients"/>
+        <label for="tags">Ingredients</label>
+           <br />
+        <input class="typeahead" type="text" id="tags" name="tags"/>
        </div>
        <br />
+        <div id="picture">
+            <label for="picture">Picture</label>
+            <br />
+            <input type="file" id="picture" name="picture" accept="image/png, image/jpeg">
+        </div>
+        <br />
        <input type="submit" value="Submit" />
        
        <input type="hidden" name="restaurant" value="tran" />
@@ -80,6 +93,10 @@ $('#ingredients .typeahead').typeahead({
   source: substringMatcher(ingredients)
 });
 
+$(":file").change(function () {
+  var inputFile = $(":file")
+  console.log('attached image')
+})
 
 // Editing /  Deleting Items
 $("button").click(function(e) {
@@ -88,7 +105,7 @@ $("button").click(function(e) {
 
     // Edit
     if (e.target.attributes.action != null && e.target.attributes.action.value == "edit") {
-        window.location.href = 'http://localhost:3000/dish/' + id;
+        window.location.href = '/dish/' + id + '/edit';
     }
 
     // Delete
@@ -103,6 +120,12 @@ $("button").click(function(e) {
     }
 
 });
+
+$(document).ready(function () {
+  $(".twitter-typeahead").each(function (index) {
+    this.style.display = null
+  })
+})
 
 </script>
 

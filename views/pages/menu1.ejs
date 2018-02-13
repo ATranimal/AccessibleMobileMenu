@@ -22,7 +22,7 @@
     <div class="categories">
         <% categories.forEach(function(category) { %>
         <div class="<%= category %>">
-            <button type="button" class="btn btn-outline-primary" data-toggle="collapse" data-target="#<%= category %>" aria-expanded="false" aria-controls="<%= category %>"><%= category %></button>
+            <button type="button" class="btn btn-outline-primary" data-toggle="collapse" data-target="#<%= category %>" aria-expanded="false" aria-controls="<%= category %>" onclick="selectedCategory(this)"><%= category %></button>
             <div id="<%= category %>" class="collapse">
                 <ul class="menu list-group">
                     <% dishes.forEach(function(dish) { %>
@@ -39,9 +39,23 @@
 </div>
 
 <script type='text/javascript'>
+
+  function selectedCategory(el) {
+    if(!$(el).hasClass('active')){
+      el.className += ' active'
+    }else {
+      $(el).removeClass('active')
+    }
+    var otherCategoryButtons = _.reject($('button'), function (button) {
+      return button === el
+    })
+    _.each(otherCategoryButtons, function (button) {
+      $(button).removeClass('active')
+      $(button).siblings(".collapse").collapse('hide')
+    })
+  }
   $('#box').keyup(function () {
     var input = $(this).val().toLowerCase();
-    console.log(input);
     $('.menu>li').each(function () {
       var text = $(this).text().toLowerCase();
       var tags = $(this).attr("data-tags");
@@ -55,7 +69,6 @@
       var tags = $(this).attr("data-tags");
       var keys = Object.keys(localStorage);
       keys = keys.filter(function (key) {return localStorage.getItem(key) === "true"});
-      console.log(keys);
       if(!keys.every(function (key) { return tags.includes(key) })){
         $(this).hide();
       }
