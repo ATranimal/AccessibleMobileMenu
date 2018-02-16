@@ -8,127 +8,67 @@
 <h1>Chez Tran Dish Database</h1>
 
 <h5>Create a new dish</h5> 
-<form action="/api/v1/dish" method="post" onsubmit="setTimeout(function () { window.location.reload(); }, 10)">
+
+<div class="row">
+  <div class="three columns">
+
     <fieldset>
         <label for="restaurant"></label>
         <input type="text" id="restaurant" name="restaurant" value="tran" style="display:none">
-       <label for="name">Name</label>
+        <label for="name">Name</label>
         <br />
-       <input type="text" id="name" name="name" placeholder="Enter the dish name" />
-       <br />
-       <div id="category">
+        <input type="text" id="name" name="name" placeholder="Enter the dish name" />
+        <br />
+        <div id="category">
         <label for="price">Category</label>
-           <br />
-        <input class="typeahead" type="text" id="category" name="category" placeholder="Enter the category" />
-       </div>
-       <br />
-       <label for="price">Price</label>
+            <br />
+        <input class="typeahead" type="text" id="categorymessage" name="category" placeholder="Enter the category" />
+        </div>
         <br />
-       <input type="text" id="price" name="price" placeholder="Enter the price" />
-       <br />
-       <label for="description">Description</label>
+        <label for="price">Price</label>
         <br />
-       <textarea id="description" name="description"></textarea>
-       <br />
-       <div id ="ingredients">
+        <input type="text" id="price" name="price" placeholder="Enter the price" />
+        <br />
+        <label for="description">Description</label>
+        <br />
+        <textarea id="description" name="description"></textarea>
+        <br />
+        <div id ="ingredients">
         <label for="tags">Ingredients</label>
-           <br />
-        <input class="typeahead" type="text" id="tags" name="tags"/>
-       </div>
-       <br />
+            <br />
+        <input class="typeahead" type="text" id="ingredient" name="ingredients"/>
+        </div>
+        <br />
         <div id="picture">
             <label for="picture">Picture</label>
             <br />
             <input type="file" id="picture" name="picture" accept="image/png, image/jpeg">
         </div>
         <br />
-       <input type="submit" value="Submit" />
-       
-       <input type="hidden" name="restaurant" value="tran" />
+        <button id="submit" action="add">Submit</button>
     </fieldset>
- </form>
+  </div>
+  <div id="ingredient_list" class="three columns">
+    <h6><u>Ingredient List:</u></h6>
+  </div>
+  <div class="six columsn">
+    <h5>Placeholder for preview</h5>
 
- <h5>Edit existing dishes</h5>
- <% dishes.forEach(function(dish) { %>
-    <% if (dish.restaurant == "tran") { %>
-    <p><%= dish.name %> <button id="<%= dish.id%>" action="edit">Edit Dish</button><button id="<%= dish.id %>">x</button></p>
-    <% } %>
+  </div>
+</div>
+
+</br>
+
+<h5>Edit existing dishes</h5>
+<% dishes.forEach(function(dish) { %>
+  <% if (dish.restaurant == "tran") { %>
+  <p><%= dish.name %> <button id="<%= dish.id%>" action="edit">Edit Dish</button><button id="<%= dish.id %>">x</button></p>
+  <% } %>
 <% }); %>
 
-<script>
-var categories = ['Appetizers', 'Main Course', 'Dessert']
-var ingredients = ['Onion', 'Garlic', 'Salt', 'Pepper', 'Chicken', ' Tomato', 'Bacon', 'Steak', 'Quail', 'Trout', 'Salmon', 'Cod']
 
-// Typeahead 
-var substringMatcher = function(strs) {
-  return function findMatches(q, cb) {
-    var matches, substringRegex;
-    matches = [];
-    substrRegex = new RegExp(q, 'i');
-    $.each(strs, function(i, str) {
-      if (substrRegex.test(str)) {
-        matches.push(str);
-      }
-    });
-    cb(matches);
-  };
-};
 
-$('#category .typeahead').typeahead({
-  hint: true,
-  highlight: true,
-  minLength: 1
-},
-{
-  name: 'categories',
-  source: substringMatcher(categories)
-});
-$('#ingredients .typeahead').typeahead({
-  hint: true,
-  highlight: true,
-  minLength: 1
-},
-{
-  name: 'ingredients',
-  source: substringMatcher(ingredients)
-});
-
-$(":file").change(function () {
-  var inputFile = $(":file")
-  console.log('attached image')
-})
-
-// Editing /  Deleting Items
-$("button").click(function(e) {
-    
-    var id = e.target.attributes.id.value;
-
-    // Edit
-    if (e.target.attributes.action != null && e.target.attributes.action.value == "edit") {
-        window.location.href = '/dish/' + id + '/edit';
-    }
-
-    // Delete
-    else {
-        $.ajax({
-        url: "/api/v1/dish/" + id,
-        type: "DELETE",
-        success: function(result){
-            window.location.reload(false); 
-        }
-        });
-    }
-
-});
-
-$(document).ready(function () {
-  $(".twitter-typeahead").each(function (index) {
-    this.style.display = null
-  })
-})
-
-</script>
-
+<script src="/js/inputform.js"></script>
 
 <style>
 
