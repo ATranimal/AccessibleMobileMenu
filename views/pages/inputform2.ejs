@@ -7,6 +7,10 @@
 <script src="/js/pdfkit.js"></script>
 <script src="/js/blob-stream.js"></script>
 
+<script src="/js/simple-tabs-pure-js.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/tab.css">
+
+
 <h1>Chez Tran Dish Database</h1>
 
 <h5>Create a new dish</h5> 
@@ -53,9 +57,20 @@
   <div id="ingredient_list" class="three columns">
     <h6><u>Ingredient List:</u></h6>
   </div>
-  <div class="six columsn">
-    <iframe width="600" height="775"></iframe>
 
+  <div class="six columns">
+      <ul class="simple-tabs" id="tabs">
+          <li class="pdf active">Generated PDF</li>
+          <li class="webpage">Live Webpage</li>
+      </ul>
+
+      <div class="clear-float"></div>
+
+      <div id="pdf" class="tab-page active-page">
+        <iframe width="600" height="775"></iframe>       
+      </div>
+      <div id="webpage" class="tab-page">
+      </div>
   </div>
 </div>
 
@@ -72,7 +87,6 @@
 
 
 <script src="/js/inputform.js"></script>
-
 <style>
 
 body {

@@ -97,6 +97,7 @@ node.addEventListener("keydown", function(event) {
 });
 
 $(document).ready(function () {
+  var demoTabs = new SimpleTabs(this.getElementById('tabs'));
   $(".twitter-typeahead").each(function (index) {
     this.style.display = null
   })
