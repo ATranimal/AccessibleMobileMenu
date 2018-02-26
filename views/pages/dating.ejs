@@ -7,15 +7,17 @@
 <link rel="stylesheet" type="text/css" href="/css/normalize.css" />
 
 <div class="container">
-    <canvas id="canvas" width=auto height=auto style="border:1px solid #000000; display:block; margin-left:auto; margin-right:auto;"></canvas>
+    <canvas id="canvas" width=500 height=500 style="border:1px solid #000000; display:block; margin-left:auto; margin-right:auto; object-fit:cover"></canvas>
     </br>
 
-    <p class="dish" id="<%= dish.id %>"><%= dish.name %> <i>$<%= dish.price %></i> <%= dish.description %> </p>
+    <p class="dish" id="<%= dish.id %>"><b><%= dish.name %></b><br/>
+        <i>$<%= dish.price %></i><br/>
+        <%= dish.description %> </p>
 
     </br>
-    <div style="margin:auto; width:50%">
-        <input id="dislike" type="submit" value="Dislike" />
-        <input id="like"type="submit" value="Like" />
+    <div class="d-flex justify-content-center">
+        <input class="d-inline-flex" id="dislike" type="submit" value="Dislike" />
+        <input class="d-inline-flex" id="like" type="submit" value="Like" />
     </div>
 </div>
 
