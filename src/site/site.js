@@ -35,7 +35,7 @@ router.route('/dating/')
 
 router.route('/:dishId/edit')
   .get(function (req, res, next) {
-    Dish.findById(req.params.dishId, function(err, dish) {
+    Dish.findById(req.params.dishId.split(" ")[1], function(err, dish) {
       return res.render('pages/dishedit', {
         dish: dish,
       });

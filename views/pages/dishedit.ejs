@@ -15,21 +15,27 @@
     <p>Ingredients: <%= dish.ingredients %></p>
     <input type="text" id="ingredients" name="ingredients" placeholder="Update the ingredients" />
     <br />
-    <button id="submitButton" type="button" dishid=<%= dish.id %>>Submit Changes</button>
+    <button id="submitButton" type="button" data-id="<%= dish.id %>">Submit Changes</button>
 </form>
 
 <a href=http://localhost:3000/dish/inputform/<%= dish.restaurant %>>Go Back</a>
 
 <script>
 $("#submitButton").on("click", function(){
-    var id = $(this).data('dishid');
-    console.log(id);
-    // $.ajax({
-    //     url: "/api/v1/dish/" + id,
-    //     type: "put",
-    //     success: function(result){
-    //         window.location.reload(false); 
-    //     }
+    var id = $("#submitButton").data("id");
+    console.log($("#price").val());
+    $.ajax({
+        url: "/api/v1/dish/" + id,
+        data: {
+            description: $("#description").val(),
+            price: $("#price").val(),
+            category: $("#category").val()
+        },
+        type: "PUT",
+        success: function(result){
+            window.location.reload(false); 
+            }    
+        });
     }
 ); 
 
