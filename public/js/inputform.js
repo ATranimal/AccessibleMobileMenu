@@ -104,15 +104,51 @@ $(document).ready(function () {
 
 ///////////////// PDF KIT
 var iframe = document.querySelector('iframe');
-var doc = new PDFDocument
-var stream = doc.pipe(blobStream())
 
-// fill with info
-doc.fontSize(25)
-   .text('Here is some vector graphics...', 100, 80);
+var itemLength = $('button[id^="item"]').length;
+var names = [];
+var prices = [];
+var descriptions = [];
 
-doc.end()
+$('button[id^="item"]').each(function() {
+  var key = this.id.split(" ")[1];
+  $.ajax({
+    url: "/api/v1/dish/" + key,
+    success: function(result) {
+      names.push(result.name);
+      prices.push(result.price);
+      descriptions.push(result.description);
 
-stream.on('finish', function() {
-  iframe.src = stream.toBlobURL('application/pdf');
+      if (names.length == itemLength){
+        createPDF();
+      }
+    }
+  })
 });
+
+function createPDF() {
+  var doc = new PDFDocument;
+  var stream = doc.pipe(blobStream());
+  
+  doc.fontSize(25)
+   .text('Chez Tran Menu', 100, 80);
+
+  for(var i = 0; i < itemLength; i++){
+    doc.moveDown()
+    .fontSize(16)
+    .text(names[i])
+    .fontSize(12)
+    .text(prices[i])
+    .text(descriptions[i]);
+  };
+
+
+
+  doc.end();
+
+  stream.on('finish', function() {
+    iframe.src = stream.toBlobURL('application/pdf');
+  });
+}
+
+

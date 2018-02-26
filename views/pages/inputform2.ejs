@@ -62,12 +62,13 @@
 </br>
 
 <h5>Edit existing dishes</h5>
-<% dishes.forEach(function(dish) { %>
-  <% if (dish.restaurant == "tran") { %>
-  <p><%= dish.name %> <button id="<%= dish.id%>" action="edit">Edit Dish</button><button id="<%= dish.id %>">x</button></p>
-  <% } %>
-<% }); %>
-
+<div id="edit-list">
+  <% dishes.forEach(function(dish) { %>
+    <% if (dish.restaurant == "tran") { %>
+    <p><%= dish.name %> <button id="item <%= dish.id%>" action="edit">Edit Dish</button><button id="<%= dish.id %>">x</button></p>
+    <% } %>
+  <% }); %>
+</div>
 
 
 <script src="/js/inputform.js"></script>
