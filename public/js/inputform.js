@@ -3,7 +3,7 @@ var ingredients = ['Onion', 'Garlic', 'Salt', 'Pepper', 'Chicken', ' Tomato', 'B
 
 var inputIngredients = [];
 
-// Typeahead 
+///////////////// Typeahead 
 var substringMatcher = function(strs) {
   return function findMatches(q, cb) {
     var matches, substringRegex;
@@ -42,7 +42,7 @@ $(":file").change(function () {
   console.log('attached image')
 })
 
-// Editing /  Deleting Items
+///////////////// Editing /  Deleting Items
 $("button").click(function(e) {
     
     var id = e.target.attributes.id.value;
@@ -84,7 +84,7 @@ $("button").click(function(e) {
     
 });
 
-// Storing Ingredients
+///////////////// Storing Ingredients
 const node = document.getElementsByName("ingredients")[0];
 node.addEventListener("keydown", function(event) {
   if (event.key === "Enter") {
@@ -101,3 +101,18 @@ $(document).ready(function () {
     this.style.display = null
   })
 })
+
+///////////////// PDF KIT
+var iframe = document.querySelector('iframe');
+var doc = new PDFDocument
+var stream = doc.pipe(blobStream())
+
+// fill with info
+doc.fontSize(25)
+   .text('Here is some vector graphics...', 100, 80);
+
+doc.end()
+
+stream.on('finish', function() {
+  iframe.src = stream.toBlobURL('application/pdf');
+});
