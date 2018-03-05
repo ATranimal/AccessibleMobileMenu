@@ -1,0 +1,157 @@
+<link rel="stylesheet" type="text/css" href="/css/skeleton.css" />
+<link rel="stylesheet" type="text/css" href="/css/normalize.css" />
+<link rel="stylesheet" type="text/css" href="/css/style.css" /> 
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+<script src="/js/typeahead.bundle.js"></script>
+<script src="/js/pdfkit.js"></script>
+<script src="/js/blob-stream.js"></script>
+
+<script src="/js/simple-tabs-pure-js.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/tab.css">
+
+
+<h1>Chez Fred Dish Database</h1>
+
+
+
+<div class="row">
+  <div class="three columns">
+    <h5>Create a new dish</h5> 
+    <fieldset>
+        <label for="restaurant"></label>
+        <input type="text" id="restaurant" name="restaurant" value="fred" style="display:none">
+        <label for="name">Name</label>
+        <br />
+        <input type="text" id="name" name="name" placeholder="Enter the dish name" />
+        <br />
+        <div id="category">
+        <label for="price">Category</label>
+            <br />
+        <input class="typeahead" type="text" id="categorymessage" name="category" placeholder="Enter the category" />
+        </div>
+        <br />
+        <label for="price">Price</label>
+        <br />
+        <input type="text" id="price" name="price" placeholder="Enter the price" />
+        <br />
+        <label for="description">Description</label>
+        <br />
+        <textarea id="description" name="description"></textarea>
+        <br />
+        <div id ="ingredients">
+        <label for="tags">Ingredients</label>
+            <br />
+        <input class="typeahead" type="text" id="ingredient" name="ingredients"/>
+        </div>
+        <br />
+        <div id="picture">
+            <label for="picture">Picture</label>
+            <br />
+            <input type="file" id="picture" name="picture" accept="image/png, image/jpeg">
+        </div>
+        <br />
+        <button id="submit" action="add">Submit</button>
+    </fieldset>
+  </div>
+
+  <div id="ingredient_list" class="two columns">
+    <h6><u>Ingredient List:</u></h6>
+  </div>
+
+  <div class="four columns">
+      <ul class="simple-tabs" id="tabs">
+        
+          <li class="webpage active">Live Webpage</li>
+          <li class="pdf">Generated PDF</li>
+      </ul>
+
+      <div class="clear-float"></div>
+      
+      <div id="pdf" class="tab-page">
+          <iframe width="560" height="775"></iframe>       
+        </div>
+      <div id="webpage" class="tab-page active-page">
+          <iframe id="theFrame" src="../fred" width="560" height="775"> </iframe>
+        </div>
+  </div>
+
+  <div class="three columns">
+      <h5>Edit existing dishes</h5>
+      <div id="edit-list">
+        <% dishes.forEach(function(dish) { %>
+          <% if (dish.restaurant == "fred") { %>
+          <p><%= dish.name %> <button id="item <%= dish.id%>" action="edit">Edit Dish</button><button id="<%= dish.id %>">x</button></p>
+          <% } %>
+        <% }); %>
+      </div>
+      
+
+  </div>
+
+</div>
+
+</br>
+
+
+
+<script src="/js/inputform.js"></script>
+<style>
+
+body {
+    margin: 26px;
+}
+
+div {
+    display: inline;
+}
+
+.tt-query {
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.tt-hint {
+  color: #999
+}
+
+.tt-menu {
+  width: 422px;
+  margin: 12px 0;
+  padding: 8px 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 8px;
+     -moz-border-radius: 8px;
+          border-radius: 8px;
+  -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+     -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+          box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+
+.tt-suggestion {
+  padding: 3px 20px;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.tt-suggestion:hover {
+  cursor: pointer;
+  color: #fff;
+  background-color: #0097cf;
+}
+
+.tt-suggestion.tt-cursor {
+  color: #fff;
+  background-color: #0097cf;
+
+}
+
+.tt-suggestion p {
+  margin: 0;
+}
+
+
+</style>

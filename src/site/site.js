@@ -75,6 +75,20 @@ router.route('/tran/')
   });
 })
 
+router.route('/fred/')
+.get(function (req, res, next) {
+  Dish.find({}, function(err, foodList) {
+    // TODO: Proper error hadnling
+    if (err) console.log("ERROR: Query cannot be found");
+    var categories = _.pluck(foodList, 'category');
+    categories = _.uniq(categories)
+    return res.render('pages/menu3', {
+      dishes: foodList,
+      categories: categories
+    });
+  });
+})
+
 
 router.route('/inputform/')
 .get(function (req, res, next) {
@@ -109,7 +123,19 @@ router.route('/inputform/tran')
   });
 });
 
-
+router.route('/inputform/fred')
+.get(function (req, res, next) {
+  Dish.find({}, function(err, foodList) {
+    // TODO: Proper error hadnling
+    if (err) console.log("ERROR: Query cannot be found");
+    var categories = _.pluck(foodList, 'category');
+    categories = _.uniq(categories)
+    return res.render('pages/inputform3', {
+      dishes: foodList,
+      categories: categories
+    });
+  });
+});
 
 router.route('/preferences')
 .get(function (req, res, next) {

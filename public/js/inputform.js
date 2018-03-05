@@ -1,4 +1,4 @@
-var categories = ['Appetizers', 'Main Course', 'Dessert']
+var categories = ['Appetizers', 'Main', 'Dessert']
 var ingredients = ['Onion', 'Garlic', 'Salt', 'Pepper', 'Chicken', ' Tomato', 'Bacon', 'Steak', 'Quail', 'Trout', 'Salmon', 'Cod']
 
 var inputIngredients = [];
@@ -57,7 +57,7 @@ $("button").click(function(e) {
         url: "/api/v1/dish/",
         type: "POST",
         data: {
-            restaurant: "tran",
+            restaurant: "fred",
             name: $("#name").val(),
             description: $("#description").val(),
             price: $("#price").val(),
@@ -132,7 +132,7 @@ function createPDF() {
   var stream = doc.pipe(blobStream());
   
   doc.fontSize(25)
-   .text('Chez Tran Menu', 100, 80);
+   .text('Chez Fred Menu', 100, 80);
 
   for(var i = 0; i < itemLength; i++){
     doc.moveDown()
