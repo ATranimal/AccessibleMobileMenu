@@ -25,7 +25,8 @@ var DishSchema = new Schema({
     type: String,
     required: "Please enter a menu category"
   },
-  ingredients: [{type: String}]
+  ingredients: [{type: String}],
+  tags: [{type: String}]
 },{
   timestamps: true
 });
