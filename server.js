@@ -27,15 +27,15 @@ if(__mode === 'dev'){
 // AWS S3 setup
 //=============
 
-// AWS.config.update({
-//   accessKeyId: process.env.AWS_ACCESS_KEY_ID || env.aws.AWS_ACCESS_KEY_ID,
-//   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || env.aws.AWS_SECRET_ACCESS_KEY,
-// })
-// global.__s3Bucket = new AWS.S3({
-//   params: {
-//     Bucket: process.env.S3_BUCKET_NAME || env.aws.S3_BUCKET_NAME
-//   }
-// })
+AWS.config.update({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID || env.aws.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || env.aws.AWS_SECRET_ACCESS_KEY,
+})
+global.__s3Bucket = new AWS.S3({
+  params: {
+    Bucket: process.env.S3_BUCKET_NAME || env.aws.S3_BUCKET_NAME
+  }
+})
 //==================
 // Body parser setup 
 //==================
